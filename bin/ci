@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+
+stage() {
+  echo
+  echo -e "\033[34;1m=>\033[0m $@"
+  echo
+}
+
+export TEMPLATE_DIR="/tmp/jcf-$(date -u +"%Y%m%d%H%M%S" | tr -d "\n")"
+
+stage "Running \"lein test\"..."
+lein test
+
+stage "Running \"lein new\"..."
+lein new jcf-static testing/things --to-dir "${TEMPLATE_DIR}"
+
+stage "Checking ${TEMPLATE_DIR} exists..."
+[[ -d "${TEMPLATE_DIR}" ]] ||
+  ( echo >&2 "$TEMPLATE_DIR is not a directory?!" ; exit 1 )
+
+ls -al "${TEMPLATE_DIR}"
