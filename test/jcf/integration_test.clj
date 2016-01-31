@@ -28,3 +28,10 @@
     (is (zero? exit)
         (format "lein test failed with status %d.\nOut:\n%s\n\nErr:\n%s\n\n"
                 exit out err))))
+
+(deftest test-lein-run
+  (let [_ (println "Running lein run. This'll take a couple of seconds...")
+        {:keys [exit out err]} (sh "lein" "run" :dir *dir*)]
+    (is (zero? exit)
+        (format "lein run failed with status %d.\nOut:\n%s\n\nErr:\n%s\n\n"
+                exit out err))))

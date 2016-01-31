@@ -85,6 +85,7 @@
   []
   (let [assets (optimizations/all (get-assets) {})
         pages (get-pages)]
+    (println (format "Generating %s page(s) to %s..." (count pages) target-dir))
     (stasis/empty-directory! target-dir)
     (optimus.export/save-assets assets target-dir)
     (stasis/export-pages pages target-dir {:optimus-assets assets})))
