@@ -9,7 +9,7 @@ following features:
 
 ## Installation
 
-[![Clojars Project](http://clojars.org/jcf/lein-template-static/latest-version.svg)](http://clojars.org/jcf/lein-template-static)
+[![Clojars Project](http://clojars.org/jcf-static/lein-template/latest-version.svg)](http://clojars.org/jcf-static/lein-template)
 
 ## Usage
 
