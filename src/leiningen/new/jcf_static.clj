@@ -16,6 +16,8 @@
   from git."
   ["dev/user.clj"
    "project.clj"
+   "resources/public/css/main.css"
+   "resources/public/css/normalize.css"
    "src/jcf/service.clj"
    "test/jcf/service_test.clj"])
 

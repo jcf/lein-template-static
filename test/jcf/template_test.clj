@@ -9,6 +9,8 @@
   [".gitignore"
    "dev/user.clj"
    "project.clj"
+   "resources/public/css/main.css"
+   "resources/public/css/normalize.css"
    "src/{{path}}/service.clj"
    "test/{{path}}/service_test.clj"])
 
