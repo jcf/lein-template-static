@@ -9,10 +9,11 @@
   [".gitignore"
    "dev/user.clj"
    "project.clj"
-   "resources/public/css/main.css"
    "resources/public/css/normalize.css"
    "src/{{path}}/service.clj"
-   "test/{{path}}/service_test.clj"])
+   "src/{{path}}/styles.clj"
+   "test/{{path}}/service_test.clj"
+   "test/{{path}}/styles_test.clj"])
 
 (def manifest
   (render-files (get-manifest clojurish-templates)
@@ -65,6 +66,7 @@
     (is (nil? (:uberjar-name props)))
     (is (= (:dependencies props)
            '[[com.stuartsierra/component "0.3.1"]
+             [garden "1.3.1"]
              [hiccup "1.0.5"]
              [optimus "0.18.4"]
              [org.clojure/clojure "1.8.0"]
@@ -73,5 +75,7 @@
              [ring/ring-jetty-adapter "1.4.0"]
              [stasis "2.3.0"]]))
     (is (= (get-in props [:profiles :dev :dependencies])
-           '[[org.clojure/tools.namespace "0.2.10"]
-             [reloaded.repl "0.2.1"]]))))
+           '[[enlive "1.1.6"]
+             [org.clojure/tools.namespace "0.2.10"]
+             [reloaded.repl "0.2.1"]
+             [ring/ring-mock "0.3.0"]]))))

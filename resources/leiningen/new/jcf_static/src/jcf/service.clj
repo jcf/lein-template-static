@@ -1,6 +1,7 @@
 (ns {{ns}}.service
   (:gen-class)
-  (:require [clojure.string :as str]
+  (:require [{{ns}}.styles :as styles]
+            [clojure.string :as str]
             [com.stuartsierra.component :as component]
             [hiccup.page :as page]
             [optimus.link :as link]
@@ -18,12 +19,6 @@
 ;; -----------------------------------------------------------------------------
 ;; Templates
 
-(s/defn style :- s/Str
-  "Naively Converts a map into a string for use in an HTML style attribute.
-  Consider using Garden when styles get a bit more advanced."
-  [m :- {s/Keyword s/Str}]
-  (str/join ";" (map (fn [[k v]] (format "%s:%s" (name k) v)) m)))
-
 (defn render-page
   "Render content into an HTML5 string"
   [context & main]
@@ -32,8 +27,7 @@
     [:title "FIXME"]
     (optimus.html/link-to-css-bundles context ["app.css"])]
    [:body
-    [:header
-     {:style (style {:background-color "#4183c4" :height "3.5em"})}]
+    [:header [:h1 "FIXME"]]
     [:main.container main]]))
 
 ;; -----------------------------------------------------------------------------
@@ -42,9 +36,11 @@
 (defn get-assets
   "https://github.com/magnars/optimus"
   []
-  (assets/load-bundle "public"
-                      "app.css"
-                      ["/css/normalize.css" "/css/main.css"]))
+  (concat
+   (assets/load-bundle "public" "app.css" ["/css/normalize.css"])
+   [{:path "/css/main.css"
+     :contents (styles/css)
+     :bundle "app.css"}]))
 
 (defn get-pages
   "Returns paths mapped to their content."
@@ -69,9 +65,10 @@
     (assoc c :server nil)))
 
 (defn new-system
-  [_]
-  (component/system-map
-   :http (map->HTTP {:port 4000})))
+  [config]
+  (let [config (merge {:port 4000} config)]
+    (component/system-map
+     :http (map->HTTP config))))
 
 ;; -----------------------------------------------------------------------------
 ;; CLI

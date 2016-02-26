@@ -1,9 +1,15 @@
 (ns {{ns}}.service-test
   (:require [clojure.test :refer :all]
-            [{{ns}}.service :refer :all]))
+            [{{ns}}.service :refer :all]
+            [net.cgrand.enlive-html :as html]
+            [ring.mock.request :as mock]
+            [schema.test :refer [validate-schemas]]
+            [clojure.string :as str]))
 
-(deftest t-style
-  (is (= (style {:border "1px solid #123"
-                 :line-height 10
-                 :text-align "center"})
-         "border:1px solid #123;line-height:10;text-align:center")))
+(use-fixtures :once validate-schemas)
+
+(deftest t-home-page
+  (let [{:keys [status body]} (app (mock/request :get "/"))
+        doc (html/html-snippet body)]
+    (is (= 200 status))
+    (is (= ["FIXME"] (-> doc (html/select [:h1]) first :content)))))
