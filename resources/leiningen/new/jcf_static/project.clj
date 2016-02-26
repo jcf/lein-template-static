@@ -2,6 +2,7 @@
   :description "FIXME: write description"
   :url "https://example.com/FIXME"
   :dependencies [[com.stuartsierra/component "0.3.1"]
+                 [garden "1.3.1"]
                  [hiccup "1.0.5"]
                  [optimus "0.18.4"]
                  [org.clojure/clojure "1.8.0"]
@@ -13,6 +14,8 @@
   :min-lein-version "2.5.0"
   :repl-options {:init-ns user}
   :profiles
-  {:dev {:dependencies [[org.clojure/tools.namespace "0.2.10"]
-                        [reloaded.repl "0.2.1"]]
+  {:dev {:dependencies [[enlive "1.1.6"]
+                        [org.clojure/tools.namespace "0.2.10"]
+                        [reloaded.repl "0.2.1"]
+                        [ring/ring-mock "0.3.0"]]
          :source-paths ["dev"]}})
