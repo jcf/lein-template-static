@@ -4,14 +4,16 @@
             [clojure.string :as str]
             [com.stuartsierra.component :as component]
             [hiccup.page :as page]
-            [optimus.link :as link]
             [optimus export html
              [assets :as assets]
+             [link :as link]
              [optimizations :as optimizations]
              [prime :as optimus]
              [strategies :refer [serve-live-assets]]]
             [ring.adapter.jetty :refer [run-jetty]]
-            [ring.middleware.content-type :refer [wrap-content-type]]
+            [ring.middleware
+             [content-type :refer [wrap-content-type]]
+             [reload :refer [wrap-reload]]]
             [schema.core :as s]
             [stasis.core :as stasis])
   (:import org.eclipse.jetty.server.Server))
@@ -59,7 +61,8 @@
 (defrecord HTTP [port]
   component/Lifecycle
   (start [c]
-    (assoc c :server (run-jetty app {:host "0.0.0.0" :port port :join? false})))
+    (assoc c :server (run-jetty (wrap-reload #'app)
+                                {:host "0.0.0.0" :port port :join? false})))
   (stop [c]
     (when-let [^Server server (:server c)] (.stop server))
     (assoc c :server nil)))

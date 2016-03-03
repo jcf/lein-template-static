@@ -72,6 +72,7 @@
              [org.clojure/clojure "1.8.0"]
              [prismatic/schema "1.0.4"]
              [ring/ring-core "1.4.0"]
+             [ring/ring-devel "1.4.0"]
              [ring/ring-jetty-adapter "1.4.0"]
              [stasis "2.3.0"]]))
     (is (= (get-in props [:profiles :dev :dependencies])
