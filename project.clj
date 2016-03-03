@@ -1,4 +1,4 @@
-(defproject jcf-static/lein-template "0.4.0"
+(defproject jcf-static/lein-template "0.5.0-SNAPSHOT"
   :description "A Leiningen template I use for quickly creating a static site."
   :url "https://github.com/jcf/lein-template-static"
   :license {:name "The MIT License"
